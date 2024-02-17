@@ -19,6 +19,7 @@ db = SQLAlchemy(app)
 
 
 class DB(db.Model):
+    '''модель БД'''
     __tablename__ = 'settings'
 
     id = db.Column(db.Integer, primary_key=True, nullable=False)
@@ -33,7 +34,7 @@ class DB(db.Model):
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
-    settings_data = DB.query.all()
+    settings_data = DB.query.all()  # вытаскиваем зн-я из БД
 
     for i in settings_data:
         video_path_value = i.video_path if i.video_path else Settings.video_path

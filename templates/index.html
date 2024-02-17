@@ -3,50 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Приложение</title>
     <link rel="stylesheet" href="../static/styles.css">
+
+    <title>SlideToggle / SlideUp / SlideDown - Pure JavaScript</title>
 </head>
 <body>
 <div id="target">
-    <h1>Приложение</h1>
+    <div class="info_camera"></div>
+    <div class="info_face"></div>
 </div>
 <div class="triggers">
-    <button id="triggerUp" title="Only slides up the target element">Настройки камеры</button>
-    <button id="triggerDown" title="Only slides down the target element">Настройки интерфейса</button>
-    <button id="triggerStart" title="Start">Запустить</button>
-    <button id="triggerStop" title="Stop">Стоп</button>
+    <button id="triggerUp" title="Only slides up the target element">Настройки интерфейса</button>
+    <button id="triggerDown" title="Only slides down the target element">Настройки камеры</button>
+    <button id="triggerToggle" title="Toggle slide-up and slide-down states for the target">Скрыть/Показать</button>
 </div>
 
-<!-- Форма для настроек камеры -->
-<div id="cameraSettingsForm" style="display:none;">
-    <form>
-        {%for i in data%}
-        <label for="video_path">Video Path:</label>
-        <input type="text" id="video_path" name="video_path" value="{{i.video_path_value}}"><br>
-
-        <label for="video_read_width">Video Read Width:</label>
-        <input type="number" id="video_read_width" name="video_read_width" value="{{i.video_read_width_value}}"><br>
-
-        <label for="video_read_height">Video Read Height:</label>
-        <input type="number" id="video_read_height" name="video_read_height" value="{{i.video_read_height_value}}"><br>
-
-        <label for="fps">FPS:</label>
-        <input type="number" id="fps" name="fps" value="{{i.fps_value}}"><br>
-
-        <label for="det_size_x">Detection Size X:</label>
-        <input type="text" id="det_size_x" name="det_size_x" value="{{i.det_size_x_value}}"><br>
-
-        <label for="det_size_y">Detection Size Y:</label>
-        <input type="text" id="det_size_y" name="det_size_y" value="{{i.det_size_y_value}}"><br>
-
-        <label for="scale_percent">Scale Percent:</label>
-        <input type="number" id="scale_percent" name="scale_percent" value="{{i.scale_percent_value}}"><br>
-
-        <input type="button" id="saveButton" value="Сохранить" onclick="saveCameraSettings()">
-        {% endfor%}
-    </form>
-</div>
-
-<script src="../static/script.js"></script>
 </body>
+<script src="../static/script.js"></script>
+
 </html>

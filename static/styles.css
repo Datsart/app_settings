@@ -8,7 +8,8 @@
 body {
     font-family: 'Roboto', sans-serif;
     background: #333;
-    min-width: 350px;
+    min-width: 350px
+
 }
 
 button {
@@ -16,6 +17,8 @@ button {
     padding: 15px 22px;
     margin: 20px 10px 0 10px;
     cursor: pointer;
+    background: #ffd000;
+    color: #333;
     outline: none;
     transform: scale(1);
     transition: .4s ease;
@@ -26,20 +29,16 @@ button:hover {
     transform: scale(1.1);
 }
 
-button#triggerUp, button#triggerDown {
-    background: #ffd000; /* Желтый фон */
-    color: #333;
-}
-
 button#triggerToggle {
     background: #faf7e9;
     color: #333;
 }
 
 #target {
-    padding: 8em 1.5em;
+    padding: 50px 50px;
+    /*padding-left: 50px;*/
     background-color: #ffd000;
-    text-align: center;
+    text-align: left;
     color: #333;
     font-weight: 700;
     border-radius: 0 0 20px 20px;
@@ -47,7 +46,7 @@ button#triggerToggle {
     display: block;
     max-width: 1200px;
     margin: 0 auto;
-    color: #333;
+    height: auto;
 }
 
 #target h1 {
@@ -60,33 +59,18 @@ button#triggerToggle {
 
 .triggers {
     text-align: center;
+    vertical-align: 100px;
 }
 
-/* Добавлены стили для кнопок Запустить и Стоп */
-#triggerStart, #triggerStop {
-    background: #fff; /* Белый фон */
-    color: #333;
-    margin-top: 20px; /* Добавлен отступ сверху */
-    display: block; /* Располагаем на новой строке */
-    margin-left: auto; /* Центрируем по горизонтали */
-    margin-right: auto; /* Центрируем по горизонтали */
+
+.info_camera {
+    padding-left: 0px;
+    line-height: 40px;
+    clear: both;
+    text-align: right;
 }
 
-#triggerStart:hover, #triggerStop:hover {
-    background: #eee; /* Измененный цвет при наведении */
+label {
+    float: left;
+    padding-right: 10px;
 }
-
-#cameraSettingsForm {
-    display: none;
-    background-color: #fff;
-    padding: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-

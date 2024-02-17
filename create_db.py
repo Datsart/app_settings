@@ -38,4 +38,4 @@ def create_db_func(video_path, video_read_width, video_read_height, fps, det_siz
         print(f"Произошла ошибка: {e}")
 
 
-create_db_func('', 1920, 1080, 30, (254316, 123321), 80)
+create_db_func('', 1920, 1080, 30, ('', 123321), 80)
