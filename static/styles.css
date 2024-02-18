@@ -30,7 +30,7 @@ button:hover {
 }
 
 button#triggerToggle {
-    background: #faf7e9;
+    background: #ffd000;
     color: #333;
 }
 
@@ -68,6 +68,7 @@ button#triggerToggle {
     line-height: 40px;
     clear: both;
     text-align: right;
+    /*display: none;*/
 }
 
 label {
