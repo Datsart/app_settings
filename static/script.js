@@ -1,46 +1,37 @@
-// function del (target, duration=500) {
-//     document.querySelector('.stop').innerHTML = ''
-// }
-
-let slideUp = (target, duration=500) => {
+let slideUp = (target, duration = 500) => {
     target.style.transitionProperty = 'height, margin, padding';
     target.style.transitionDuration = duration + 'ms';
-    target.style.boxSizing = 'border-box';
-    target.style.height = target.offsetHeight + 'px';
-    target.offsetHeight;
     target.style.overflow = 'hidden';
-    target.style.height = 0;
+    target.style.height = target.offsetHeight + 'px';
     target.style.paddingTop = 0;
     target.style.paddingBottom = 0;
     target.style.marginTop = 0;
     target.style.marginBottom = 0;
-    let stopButton = document.querySelector('.stop');
-    stopButton.innerHTML = `<button id="stop_btn">Стоп</button>`;
-    stopButton.addEventListener('click', function () {
-        stopButton.remove()
-    })
-    // if (!stopButton) {
-    //     stopButton = document.createElement('button');
-    //     stopButton.id = 'stop_btn';
-    //     stopButton.textContent = 'Стоп';
-    //     stopButton.addEventListener('click', function() {
-    //         stopButton.remove();
-    //     });
-    //     document.querySelector('.stop').appendChild(stopButton);
-    // }
-    window.setTimeout( () => {
-      target.style.display = 'none';
-      target.style.removeProperty('height');
-      target.style.removeProperty('padding-top');
-      target.style.removeProperty('padding-bottom');
-      target.style.removeProperty('margin-top');
-      target.style.removeProperty('margin-bottom');
-      target.style.removeProperty('overflow');
-      target.style.removeProperty('transition-duration');
-      target.style.removeProperty('transition-property');
-    }, duration);
-  }
+    let stopButton = document.getElementById('stop_btn');
+    if (!stopButton) {
+        let stopButtonContainer = document.querySelector('.stop');
+        stopButtonContainer.innerHTML += '<button id="stop_btn">Стоп</button>';
+        stopButton = document.getElementById('stop_btn');
+        stopButton.addEventListener('click', function () {
+            stopButton.remove();
+        });
+    }
 
+    setTimeout(() => {
+        target.style.height = 0;
+    }, 0);
+    setTimeout(() => {
+        target.style.display = 'none';
+        target.style.removeProperty('height');
+        target.style.removeProperty('padding-top');
+        target.style.removeProperty('padding-bottom');
+        target.style.removeProperty('margin-top');
+        target.style.removeProperty('margin-bottom');
+        target.style.removeProperty('overflow');
+        target.style.removeProperty('transition-duration');
+        target.style.removeProperty('transition-property');
+    }, duration);
+}
 let slideDown_face = (target, duration = 500) => {
     target.style.removeProperty('display');
     let display = window.getComputedStyle(target).display;
@@ -164,6 +155,5 @@ let slideBtnClick = (id, sl) => document.getElementById(id).addEventListener('cl
 
 slideBtnClick('triggerUp', slideDown_face);
 slideBtnClick('triggerDown', slideDown_camera);
-slideBtnClick('triggerToggle', slideToggle);
+slideBtnClick('triggerToggle', slideDown_camera);
 slideBtnClick('start', slideUp)
-// slideBtnClick('stop_obj', slideToggle)
