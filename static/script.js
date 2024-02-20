@@ -7,15 +7,40 @@ let slideUp = (target, duration = 500) => {
     target.style.paddingBottom = 0;
     target.style.marginTop = 0;
     target.style.marginBottom = 0;
-    let stopButton = document.getElementById('stop_btn');
-    if (!stopButton) {
-        let stopButtonContainer = document.querySelector('.stop');
-        stopButtonContainer.innerHTML += '<button id="stop_btn">Стоп</button>';
-        stopButton = document.getElementById('stop_btn');
-        stopButton.addEventListener('click', function () {
-            stopButton.remove();
+
+    function createStartButton(container) {
+        container.innerHTML = '<button id="start_btn">Старт</button>';
+        let startButton = document.getElementById('start_btn');
+        startButton.style.backgroundColor = 'aquamarine'
+        startButton.addEventListener('click', function () {
+            createStopButton(container);
         });
     }
+
+    function createStopButton(container) {
+        container.innerHTML = '<button id="stop_btn">Стоп</button>';
+        let stopButton = document.getElementById('stop_btn');
+        stopButton.addEventListener('click', function () {
+            createStartButton(container);
+        });
+    }
+
+    let stopButtonContainer = document.querySelector('.stop');
+    if (stopButtonContainer) {
+        createStopButton(stopButtonContainer);
+    }
+
+    // let stopButton = document.getElementById('stop_btn');
+    // if (!stopButton) {
+    //     let stopButtonContainer = document.querySelector('.stop');
+    //     stopButtonContainer.innerHTML = '<button id="stop_btn">Стоп</button>';
+    //     stopButton = document.getElementById('stop_btn');
+    //     stopButton.addEventListener('click', function () {
+    //         stopButton.remove();
+    //         stopButtonContainer.innerHTML = '<button id="start">Старт</button>';
+    //
+    //     });
+    // }
 
     setTimeout(() => {
         target.style.height = 0;
