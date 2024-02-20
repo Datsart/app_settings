@@ -1,65 +1,63 @@
-let slideUp = (target, duration = 500) => {
-    target.style.transitionProperty = 'height, margin, padding';
-    target.style.transitionDuration = duration + 'ms';
-    target.style.overflow = 'hidden';
-    target.style.height = target.offsetHeight + 'px';
-    target.style.paddingTop = 0;
-    target.style.paddingBottom = 0;
-    target.style.marginTop = 0;
-    target.style.marginBottom = 0;
+function createStartButton(container) {
+    console.log(2)
+    container.innerHTML = '<button id="start">Старт</button>';
+    let startButton = document.getElementById('start');
+    startButton.style.backgroundColor = 'aquamarine'
+    startButton.addEventListener('click', function () {
+        console.log(3)
 
-    function createStartButton(container) {
-        container.innerHTML = '<button id="start_btn">Старт</button>';
-        let startButton = document.getElementById('start_btn');
-        startButton.style.backgroundColor = 'aquamarine'
-        startButton.addEventListener('click', function () {
-            createStopButton(container);
-        });
-    }
-
-    function createStopButton(container) {
-        container.innerHTML = '<button id="stop_btn">Стоп</button>';
-        let stopButton = document.getElementById('stop_btn');
-        stopButton.addEventListener('click', function () {
-            createStartButton(container);
-        });
-    }
-
-    let stopButtonContainer = document.querySelector('.stop');
-    if (stopButtonContainer) {
-        createStopButton(stopButtonContainer);
-    }
-
-    // let stopButton = document.getElementById('stop_btn');
-    // if (!stopButton) {
-    //     let stopButtonContainer = document.querySelector('.stop');
-    //     stopButtonContainer.innerHTML = '<button id="stop_btn">Стоп</button>';
-    //     stopButton = document.getElementById('stop_btn');
-    //     stopButton.addEventListener('click', function () {
-    //         stopButton.remove();
-    //         stopButtonContainer.innerHTML = '<button id="start">Старт</button>';
-    //
-    //     });
-    // }
-
-    setTimeout(() => {
-        target.style.height = 0;
-    }, 0);
-    setTimeout(() => {
-
-        target.style.display = 'none';
-        target.style.removeProperty('height');
-        target.style.removeProperty('padding-top');
-        target.style.removeProperty('padding-bottom');
-        target.style.removeProperty('margin-top');
-        target.style.removeProperty('margin-bottom');
-        target.style.removeProperty('overflow');
-        target.style.removeProperty('transition-duration');
-        target.style.removeProperty('transition-property');
-        let stopButton = document.getElementById('stop_btn');
-
-    }, duration);
+        createStopButton(container);
+    });
 }
+
+function createStopButton(container) {
+    console.log(4)
+    container.innerHTML = '<button id="stop_btn">Стоп</button>';
+    let stopButton = document.getElementById('stop_btn');
+    stopButton.addEventListener('click', function () {
+        console.log(5)
+        createStartButton(container);
+    });
+}
+
+console.log(6)
+let stopButtonContainer = document.querySelector('.stop');
+if (stopButtonContainer) {
+    console.log(7)
+    createStartButton(stopButtonContainer);
+}
+
+// let slideUp = (target, duration = 500) => {
+//     console.log(1)
+//     target.style.transitionProperty = 'height, margin, padding';
+//     target.style.transitionDuration = duration + 'ms';
+//     target.style.overflow = 'hidden';
+//     target.style.height = target.offsetHeight + 'px';
+//     target.style.paddingTop = 0;
+//     target.style.paddingBottom = 0;
+//     target.style.marginTop = 0;
+//     target.style.marginBottom = 0;
+//
+//
+//     console.log(8)
+//     setTimeout(() => {
+//         target.style.height = 0;
+//     }, 0);
+//     setTimeout(() => {
+//
+//         target.style.display = 'none';
+//         target.style.removeProperty('height');
+//         target.style.removeProperty('padding-top');
+//         target.style.removeProperty('padding-bottom');
+//         target.style.removeProperty('margin-top');
+//         target.style.removeProperty('margin-bottom');
+//         target.style.removeProperty('overflow');
+//         target.style.removeProperty('transition-duration');
+//         target.style.removeProperty('transition-property');
+//         let stopButton = document.getElementById('stop_btn');
+//
+//     }, duration);
+// }
 let slideDown_face = (target, duration = 500) => {
     document.querySelector('.info_camera').innerHTML = `
     <form>
@@ -229,4 +227,4 @@ let slideBtnClick = (id, sl) => document.getElementById(id).addEventListener('cl
 slideBtnClick('triggerUp', slideDown_face);
 slideBtnClick('triggerDown', slideDown_camera);
 slideBtnClick('triggerToggle', slideDown_camera);
-slideBtnClick('start', slideUp)
+// slideBtnClick('start', slideUp)
