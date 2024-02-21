@@ -78,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
         
 
-        <input type="button" id="saveButton" value="Сохранить" onclick="saveCameraSettings()">
     </form>`
         target.style.removeProperty('display');
         let display = window.getComputedStyle(target).display;
@@ -153,7 +152,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
         <label for="scale_percent">Scale Percent:</label>
         <input type="number" id="scale_percent" name="scale_percent" value="123"><br>
 
-        <input type="button" id="saveButton" value="Сохранить">
     </form>`
         target.style.removeProperty('display');
         let display = window.getComputedStyle(target).display;
