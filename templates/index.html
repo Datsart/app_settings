@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/styles.css">
-    <title>SlideToggle / SlideUp / SlideDown - Pure JavaScript</title>
+    <title>{{ full_url }}</title>
 </head>
 <body>
 <div id="target">
     <div class="info_camera"></div>
     <div class="info_face"></div>
+
 </div>
 <div class="triggers">
     <button id="triggerUp" title="Only slides up the target element">Настройки интерфейса</button>
@@ -17,11 +18,11 @@
     <button id="triggerToggle" title="Toggle slide-up and slide-down states for the target">Обогащение</button>
     <div class="stop">
         <button id="start">Старт</button>
-<!--        <button id="stop_btn">Стоп</button>-->
     </div>
 </div>
 
 </body>
 <script src="../static/script.js"></script>
+<script id="full-url" data-full-url="{{ full_url }}"></script>
 
 </html>

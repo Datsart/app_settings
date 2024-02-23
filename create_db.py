@@ -1,7 +1,11 @@
 import sqlite3
+from datetime import datetime
+
+now = datetime.now()
+current_time = now.strftime("%Y-%m-%d %H:%M:%S")
 
 
-def create_db_func(video_path, video_read_width, video_read_height, fps, det_size, scale_percent):
+def create_db_func(feature, attribute, value, create_time, update_time):
     try:
         with sqlite3.connect(database='database.db') as connection:
             cursor = connection.cursor()
@@ -9,27 +13,23 @@ def create_db_func(video_path, video_read_width, video_read_height, fps, det_siz
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS settings (
                     ID INTEGER PRIMARY KEY,
-                    video_path TEXT NOT NULL,
-                    video_read_width INTEGER NOT NULL,
-                    video_read_height INTEGER NOT NULL,
-                    fps INTEGER NOT NULL,
-                    det_size_x INTEGER NOT NULL,
-                    det_size_y INTEGER NOT NULL,
-                    scale_percent INTEGER NOT NULL
+                    feature TEXT NOT NULL,
+                    attribute TEXT NOT NULL,
+                    value TEXT NOT NULL,
+                    create_time timestamp,
+                    update_time timestamp
                 )
             ''')
 
             cursor.execute('''
                 INSERT INTO settings (
-                    video_path, 
-                    video_read_width, 
-                    video_read_height, 
-                    fps, 
-                    det_size_x, 
-                    det_size_y, 
-                    scale_percent
-                ) VALUES (?, ?, ?, ?, ?, ?, ?)
-            ''', (video_path, video_read_width, video_read_height, fps, *det_size, scale_percent))
+                    feature, 
+                    attribute, 
+                    value, 
+                    create_time, 
+                    update_time
+                ) VALUES (?, ?, ?, ?, ?)
+            ''', (feature, attribute, value, create_time, update_time))
 
             connection.commit()
             print('Создана новая таблица')
@@ -38,4 +38,4 @@ def create_db_func(video_path, video_read_width, video_read_height, fps, det_siz
         print(f"Произошла ошибка: {e}")
 
 
-create_db_func('', 1920, 1080, 30, ('', 123321), 80)
+create_db_func('camera', 1920, 1080, current_time, current_time)
