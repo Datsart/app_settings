@@ -7,7 +7,7 @@ def settings_dict():
                 'default': 'True if empty() else будет значение из БД',
             },
             'demo_monitor_index': {
-                'text': 'Индекс монитора:',  # не знаю что тут имелось ввиду
+                'text': 'Индекс монитора:',
                 'value': 0,
                 'default': 'True if empty() else будет значение из БД',
             },

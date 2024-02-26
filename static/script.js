@@ -1,52 +1,7 @@
 document.addEventListener('DOMContentLoaded', function (event) {
 
 
-    function createStartButton(container) {
-        container.innerHTML = '<button id="start">Старт</button>';
-        let startButton = document.getElementById('start');
-        startButton.style.backgroundColor = 'aquamarine'
-        startButton.addEventListener('click', function () {
-            createStopButton(container)
 
-            let url_for_post_element = document.getElementById('url-for-post');
-            let url_for_post = url_for_post_element.getAttribute('data-url-for-post');
-
-            let data = {
-                'video_path': +document.getElementById('video_path_value').value,
-                'video_read_width': +document.getElementById('video_read_width_value').value,
-                'video_read_height': +document.getElementById('video_read_height_value').value,
-                'fps': +document.getElementById('fps_value').value,
-                'det_size_x': +document.getElementById('det_size_x_value').value,
-                'det_size_y': +document.getElementById('det_size_y_value').value,
-                'scale_percent': eval(document.getElementById('scale_percent_value').value),
-            };
-
-            fetch(url_for_post, {
-                "method": "POST",
-                "headers": {"Content-Type": "application/json"},
-                "body": JSON.stringify(data),
-            })
-                .then(response => {
-                    return response.json();
-                })
-
-
-        });
-    }
-
-    function createStopButton(container) {
-        container.innerHTML = '<button id="stop_btn">Стоп</button>';
-        let stopButton = document.getElementById('stop_btn');
-        stopButton.addEventListener('click', function () {
-
-            createStartButton(container);
-        });
-    }
-
-    let stopButtonContainer = document.querySelector('.stop');
-    if (stopButtonContainer) {
-        createStartButton(stopButtonContainer);
-    }
 
 
     let slideDown_face = (target, duration = 500) => {
@@ -212,6 +167,54 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
             })
     })
+    function createStartButton(container) {
+        container.innerHTML = '<button id="start">Старт</button>';
+        let startButton = document.getElementById('start');
+        startButton.style.backgroundColor = 'aquamarine'
+        startButton.addEventListener('click', function () {
+            createStopButton(container)
+
+            let url_for_post_element = document.getElementById('url-for-post');
+            let url_for_post = url_for_post_element.getAttribute('data-url-for-post');
+
+            let data = {
+                'video_path': +document.getElementById('video_path_value').value,
+                'video_read_width': +document.getElementById('video_read_width_value').value,
+                'video_read_height': +document.getElementById('video_read_height_value').value,
+                'fps': +document.getElementById('fps_value').value,
+                'det_size_x': +document.getElementById('det_size_x_value').value,
+                'det_size_y': +document.getElementById('det_size_y_value').value,
+                // 'scale_percent': eval(document.getElementById('scale_percent_value').value),
+                // 'demo_monitor_index': +document.getElementById('demo_monitor_index_value').value,
+                // 'face_rectangle_border_size': +document.getElementById('face_rectangle_border_size_value').value,
+            };
+
+            fetch(url_for_post, {
+                "method": "POST",
+                "headers": {"Content-Type": "application/json"},
+                "body": JSON.stringify(data),
+            })
+                .then(response => {
+                    return response.json();
+                })
+
+
+        });
+    }
+
+    function createStopButton(container) {
+        container.innerHTML = '<button id="stop_btn">Стоп</button>';
+        let stopButton = document.getElementById('stop_btn');
+        stopButton.addEventListener('click', function () {
+
+            createStartButton(container);
+        });
+    }
+
+    let stopButtonContainer = document.querySelector('.stop');
+    if (stopButtonContainer) {
+        createStartButton(stopButtonContainer);
+    }
 
 
 })

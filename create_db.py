@@ -38,4 +38,4 @@ def create_db_func(feature, attribute, value, create_time, update_time):
         print(f"Произошла ошибка: {e}")
 
 
-create_db_func('camera', 1920, 1080, current_time, current_time)
+# create_db_func('camera', 1920, 1080, current_time, current_time)
