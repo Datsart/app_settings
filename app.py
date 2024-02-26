@@ -42,6 +42,12 @@ def send_structute():
     return settings_dict()
 
 
+@app.route('/post_response', methods=['GET', 'POST'])
+def take_info():
+    data = request.get_json()
+    print(data)
+    return data
+
 
 @app.route('/app', methods=['GET', 'POST'])
 def login():
@@ -60,8 +66,9 @@ def login():
     #          'update_time': update_time_value,
     #          }]
     full_url = request.url_root + 'send_structute'
+    url_for_post = request.url_root + 'post_response'
     # print("Full URL for '/app':", full_url)
-    return render_template('index.html', full_url=full_url)
+    return render_template('index.html', full_url=full_url, url_for_post=url_for_post)
 
 
 # def send_settings():

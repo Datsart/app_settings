@@ -24,7 +24,7 @@ def settings_dict():
                 'default': 'True if empty() else будет значение из БД',
             },
             'video_read_width': {
-                'text': 'разрешение входного видео (ширина):',
+                'text': 'Разрешение входного видео (ширина):',
                 'value': 1920,
                 'default': 'True if empty() else будет значение из БД',
             },
@@ -38,19 +38,19 @@ def settings_dict():
                 'value': 10,
                 'default': 'True if empty() else будет значение из БД',
             },
-            'det_size_X': {
+            'det_size_x': {
                 'text': 'Сжатие для insightface (ширина):',
                 'value': 256,
                 'default': 'True if empty() else будет значение из БД',
             },
-            'det_size_Y': {
+            'det_size_y': {
                 'text': 'Сжатие для insightface (высота):',
                 'value': 256,
                 'default': 'True if empty() else будет значение из БД',
             },
             'scale_percent': {
                 'text': 'Процент сжатия входного кадра (1/2) (1/3) и т.п:',
-                'value': (1 / 1),
+                'value': '(1 / 1)',
                 'default': 'True if empty() else будет значение из БД',
             },
         },

@@ -6,8 +6,31 @@ document.addEventListener('DOMContentLoaded', function (event) {
         let startButton = document.getElementById('start');
         startButton.style.backgroundColor = 'aquamarine'
         startButton.addEventListener('click', function () {
-
             createStopButton(container)
+
+            let url_for_post_element = document.getElementById('url-for-post');
+            let url_for_post = url_for_post_element.getAttribute('data-url-for-post');
+
+            let data = {
+                'video_path': +document.getElementById('video_path_value').value,
+                'video_read_width': +document.getElementById('video_read_width_value').value,
+                'video_read_height': +document.getElementById('video_read_height_value').value,
+                'fps': +document.getElementById('fps_value').value,
+                'det_size_x': +document.getElementById('det_size_x_value').value,
+                'det_size_y': +document.getElementById('det_size_y_value').value,
+                'scale_percent': eval(document.getElementById('scale_percent_value').value),
+            };
+
+            fetch(url_for_post, {
+                "method": "POST",
+                "headers": {"Content-Type": "application/json"},
+                "body": JSON.stringify(data),
+            })
+                .then(response => {
+                    return response.json();
+                })
+
+
         });
     }
 
@@ -75,10 +98,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
         document.querySelector('.info_camera').innerHTML = `
     <form>
         <label>Настройки камеры</label><br>
-        <label for="video_path" id="video_path_title">Video Path:</label>
+        <label for="video_path_value" id="video_path_title">Video Path:</label>
         <input type="text" id="video_path_value"><br>
 
-        <label for="video_read_width" id="video_read_width_title">Video Read Width:</label>
+
+        <label for="video_read_width_value" id="video_read_width_title">Video Read Width:</label>
         <input type="number" id="video_read_width_value"><br>
 
         <label for="video_read_height" id="video_read_height_title">Video Read Height:</label>
@@ -87,14 +111,19 @@ document.addEventListener('DOMContentLoaded', function (event) {
         <label for="fps">FPS:</label>
         <input type="number" id="fps_value"><br>
 
-        <label for="det_size_x" id="det_size_x_title">Detection Size X:</label>
-        <input type="text" id="det_size_x_value" <br>
+        <div>
+            <label for="det_size_x" id="det_size_x_title">Detection Size X:</label>
+            <input type="text" id="det_size_x_value"><br>
+        </div>
 
-        <label for="det_size_y" id="det_size_y_title">Detection Size Y:</label>
-        <input type="text" id="det_size_y_value" <br>
+        <div>
+            <label for="det_size_y" id="det_size_y_title">Detection Size Y:</label>
+            <input type="text" id="det_size_y_value"><br>
+        </div>
+
 
         <label for="scale_percent" id="scale_percent_title">Scale Percent:</label>
-        <input type="number" id="scale_percent_value" <br>
+        <input type="text" id="scale_percent_value" <br>
     </form>`
         target.style.removeProperty('display');
         let display = window.getComputedStyle(target).display;
@@ -135,11 +164,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
     slideBtnClick('triggerUp', slideDown_face);
     slideBtnClick('triggerDown', slideDown_camera);
     slideBtnClick('triggerToggle', slideDown_camera);
+
+    // АПИХА
+
     let full_url_element = document.getElementById('full-url');
     let full_url = full_url_element.getAttribute('data-full-url');
 
-    // console.log("Full URL in JavaScript:", full_url);
     document.getElementById('triggerUp').addEventListener('click', function () {
+        // настройки ИНТЕРФЕЙСА
         fetch(full_url)
             .then(response => response.json())
             .then(data => {
@@ -156,10 +188,30 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 document.getElementById('demo_monitor_index_value').value = data['interface']['demo_monitor_index']['value']
                 document.getElementById('face_rectangle_border_size_title').innerText = data['interface']['face_rectangle_border_size']['text']
                 document.getElementById('face_rectangle_border_size_value').value = data['interface']['face_rectangle_border_size']['value']
-                // document.getElementById('video_path_title').innerText = data['camera']['video_path']['text']
-                // document.getElementById('video_path_value').value = data['camera']['video_path']['value']
-                console.log(document.getElementById('video_path_title'))
             })
     })
+    document.getElementById('triggerDown').addEventListener('click', function () {
+        // настроки КАМЕРЫ
+        fetch(full_url)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('video_path_title').innerText = data['camera']['video_path']['text']
+                document.getElementById('video_path_value').value = data['camera']['video_path']['value']
+                document.getElementById('video_read_width_title').innerText = data['camera']['video_read_width']['text']
+                document.getElementById('video_read_width_value').value = data['camera']['video_read_width']['value']
+                document.getElementById('video_read_height_title').innerText = data['camera']['video_read_height']['text']
+                document.getElementById('video_read_height_value').value = data['camera']['video_read_height']['value']
+                document.getElementById('fps_value').value = data['camera']['fps']['value']
+                document.getElementById('det_size_x_title').innerText = data['camera']['det_size_x']['text']
+                document.getElementById('det_size_x_value').value = data['camera']['det_size_x']['value']
+                document.getElementById('det_size_y_title').innerText = data['camera']['det_size_y']['text']
+                document.getElementById('det_size_y_value').value = data['camera']['det_size_y']['value']
+                document.getElementById('scale_percent_title').innerText = data['camera']['scale_percent']['text']
+                document.getElementById('scale_percent_value').value = data['camera']['scale_percent']['value']
+
+
+            })
+    })
+
 
 })
