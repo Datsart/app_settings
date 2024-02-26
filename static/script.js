@@ -1,7 +1,43 @@
 document.addEventListener('DOMContentLoaded', function (event) {
+    let full_url_element = document.getElementById('full-url');
+    let full_url = full_url_element.getAttribute('data-full-url');
+    // то что я передаю в формы
+    fetch(full_url)
+        .then(response => response.json())
+        .then(data => {
+            let demo_gui = data['interface']['demo_gui_on_full_screen_without_borders']['value'][0]
+            if (demo_gui === true) {
+                document.getElementById('demo_gui_True').checked = true;
+                document.getElementById('demo_gui_title').value = true
+                document.getElementById('demo_gui_False').checked = false;
+            } else {
+                document.getElementById('demo_gui_True').checked = false;
+                document.getElementById('demo_gui_title').value = false
+                document.getElementById('demo_gui_False').checked = true;
+            }
+            document.getElementById('demo_gui_title').innerText = data['interface']['demo_gui_on_full_screen_without_borders']['text']
+            document.getElementById('demo_monitor_index_title').innerText = data['interface']['demo_monitor_index']['text']
+            document.getElementById('demo_monitor_index_value').value = data['interface']['demo_monitor_index']['value']
+            document.getElementById('face_rectangle_border_size_title').innerText = data['interface']['face_rectangle_border_size']['text']
+            document.getElementById('face_rectangle_border_size_value').value = data['interface']['face_rectangle_border_size']['value']
+            document.getElementById('video_path_title').innerText = data['camera']['video_path']['text']
+            document.getElementById('video_path_value').value = data['camera']['video_path']['value']
+            document.getElementById('video_read_width_title').innerText = data['camera']['video_read_width']['text']
+            document.getElementById('video_read_width_value').value = data['camera']['video_read_width']['value']
+            document.getElementById('video_read_height_title').innerText = data['camera']['video_read_height']['text']
+            document.getElementById('video_read_height_value').value = data['camera']['video_read_height']['value']
+            document.getElementById('fps_value').value = data['camera']['fps']['value']
+            document.getElementById('det_size_x_title').innerText = data['camera']['det_size_x']['text']
+            document.getElementById('det_size_x_value').value = data['camera']['det_size_x']['value']
+            document.getElementById('det_size_y_title').innerText = data['camera']['det_size_y']['text']
+            document.getElementById('det_size_y_value').value = data['camera']['det_size_y']['value']
+            document.getElementById('scale_percent_title').innerText = data['camera']['scale_percent']['text']
+            document.getElementById('scale_percent_value').value = data['camera']['scale_percent']['value']
+        })
+
+
     document.querySelector('.info_face').style.display = 'none'
     document.querySelector('.info_camera').style.display = 'none'
-
     let slideDown_face = (target, duration = 500) => {
         document.querySelector('.info_face').style.display = 'none'
         document.querySelector('.info_camera').style.display = 'block'
@@ -66,53 +102,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
     slideBtnClick('triggerDown', slideDown_camera);
     slideBtnClick('triggerToggle', slideDown_camera);
 
-    // АПИХА
-
-    let full_url_element = document.getElementById('full-url');
-    let full_url = full_url_element.getAttribute('data-full-url');
-
-    document.getElementById('triggerUp').addEventListener('click', function () {
-        // настройки ИНТЕРФЕЙСА
-        fetch(full_url)
-            .then(response => response.json())
-            .then(data => {
-                let demo_gui = data['interface']['demo_gui_on_full_screen_without_borders']['value'][0]
-                if (demo_gui === true) {
-                    document.getElementById('demo_gui_True').checked = true;
-                    document.getElementById('demo_gui_False').checked = false;
-                } else {
-                    document.getElementById('demo_gui_True').checked = false;
-                    document.getElementById('demo_gui_False').checked = true;
-                }
-                document.getElementById('demo_gui_title').innerText = data['interface']['demo_gui_on_full_screen_without_borders']['text']
-                document.getElementById('demo_monitor_index_title').innerText = data['interface']['demo_monitor_index']['text']
-                document.getElementById('demo_monitor_index_value').value = data['interface']['demo_monitor_index']['value']
-                document.getElementById('face_rectangle_border_size_title').innerText = data['interface']['face_rectangle_border_size']['text']
-                document.getElementById('face_rectangle_border_size_value').value = data['interface']['face_rectangle_border_size']['value']
-            })
-    })
-    document.getElementById('triggerDown').addEventListener('click', function () {
-        // настроки КАМЕРЫ
-        fetch(full_url)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('video_path_title').innerText = data['camera']['video_path']['text']
-                document.getElementById('video_path_value').value = data['camera']['video_path']['value']
-                document.getElementById('video_read_width_title').innerText = data['camera']['video_read_width']['text']
-                document.getElementById('video_read_width_value').value = data['camera']['video_read_width']['value']
-                document.getElementById('video_read_height_title').innerText = data['camera']['video_read_height']['text']
-                document.getElementById('video_read_height_value').value = data['camera']['video_read_height']['value']
-                document.getElementById('fps_value').value = data['camera']['fps']['value']
-                document.getElementById('det_size_x_title').innerText = data['camera']['det_size_x']['text']
-                document.getElementById('det_size_x_value').value = data['camera']['det_size_x']['value']
-                document.getElementById('det_size_y_title').innerText = data['camera']['det_size_y']['text']
-                document.getElementById('det_size_y_value').value = data['camera']['det_size_y']['value']
-                document.getElementById('scale_percent_title').innerText = data['camera']['scale_percent']['text']
-                document.getElementById('scale_percent_value').value = data['camera']['scale_percent']['value']
-
-
-            })
-    })
 
     function createStartButton(container) {
         container.innerHTML = '<button id="start">Старт</button>';
@@ -123,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
             let url_for_post_element = document.getElementById('url-for-post');
             let url_for_post = url_for_post_element.getAttribute('data-url-for-post');
+            // то что я передаю обратно во фласк
 
             let data = {
                 'video_path': +document.getElementById('video_path_value').value,
@@ -131,9 +121,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 'fps': +document.getElementById('fps_value').value,
                 'det_size_x': +document.getElementById('det_size_x_value').value,
                 'det_size_y': +document.getElementById('det_size_y_value').value,
-                // 'scale_percent': eval(document.getElementById('scale_percent_value').value),
-                // 'demo_monitor_index': +document.getElementById('demo_monitor_index_value').value,
-                // 'face_rectangle_border_size': +document.getElementById('face_rectangle_border_size_value').value,
+                'scale_percent': eval(document.getElementById('scale_percent_value').value),
+                'demo_monitor_index': +document.getElementById('demo_monitor_index_value').value,
+                'face_rectangle_border_size': +document.getElementById('face_rectangle_border_size_value').value,
+                'demo_gui_on_full_screen_without_borders': document.getElementById('demo_gui_title').value,
             };
 
             fetch(url_for_post, {
