@@ -38,7 +38,6 @@ def redirect_to_route():
 
 @app.route('/send_structute', methods=['GET', 'POST'])
 def send_structute():
-    # print(settings_dict())
     return settings_dict()
 
 
@@ -46,6 +45,7 @@ def send_structute():
 def take_info():
     data = request.get_json()
     print(data)
+
     return data
 
 

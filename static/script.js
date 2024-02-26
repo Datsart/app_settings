@@ -1,30 +1,11 @@
 document.addEventListener('DOMContentLoaded', function (event) {
-
-
-
-
+    document.querySelector('.info_face').style.display = 'none'
+    document.querySelector('.info_camera').style.display = 'none'
 
     let slideDown_face = (target, duration = 500) => {
-        document.querySelector('.info_camera').innerHTML = `
-    <form>
-        <label>Настройки интерфейса</label><br>
-        <label for="demo_gui_on_full_screen_without_borders" id="demo_gui_title">Demo_gui_on_full_screen_without_borders:</label>
-        <p>True <input type="checkbox" id="demo_gui_True"  </p>
-        <p>False <input type="checkbox" id="demo_gui_False"  </p>
-        
-        <br>
-        <label for="demo_monitor_index" id="demo_monitor_index_title">Demo_monitor_index:</label>
-        <input type="number" id="demo_monitor_index_value"><br>
+        document.querySelector('.info_face').style.display = 'none'
+        document.querySelector('.info_camera').style.display = 'block'
 
-        <label for="face_rectangle_border_size" id="face_rectangle_border_size_title">Face_rectangle_border_size:</label>
-        <input type="number" id="face_rectangle_border_size_value"><br>
-    </form>`
-        target.style.removeProperty('display');
-        let display = window.getComputedStyle(target).display;
-        if (display === 'none')
-            display = 'block';
-
-        target.style.display = display;
         let height = target.offsetHeight;
         target.style.overflow = 'hidden';
         target.style.height = 0;
@@ -50,43 +31,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
     }
 
     let slideDown_camera = (target, duration = 500) => {
-        document.querySelector('.info_camera').innerHTML = `
-    <form>
-        <label>Настройки камеры</label><br>
-        <label for="video_path_value" id="video_path_title">Video Path:</label>
-        <input type="text" id="video_path_value"><br>
-
-
-        <label for="video_read_width_value" id="video_read_width_title">Video Read Width:</label>
-        <input type="number" id="video_read_width_value"><br>
-
-        <label for="video_read_height" id="video_read_height_title">Video Read Height:</label>
-        <input type="number" id="video_read_height_value"><br>
-
-        <label for="fps">FPS:</label>
-        <input type="number" id="fps_value"><br>
-
-        <div>
-            <label for="det_size_x" id="det_size_x_title">Detection Size X:</label>
-            <input type="text" id="det_size_x_value"><br>
-        </div>
-
-        <div>
-            <label for="det_size_y" id="det_size_y_title">Detection Size Y:</label>
-            <input type="text" id="det_size_y_value"><br>
-        </div>
-
-
-        <label for="scale_percent" id="scale_percent_title">Scale Percent:</label>
-        <input type="text" id="scale_percent_value" <br>
-    </form>`
-        target.style.removeProperty('display');
-        let display = window.getComputedStyle(target).display;
-
-        if (display === 'none')
-            display = 'block';
-
-        target.style.display = display;
+        document.querySelector('.info_face').style.display = 'block'
+        document.querySelector('.info_camera').style.display = 'none'
         let height = target.offsetHeight;
         target.style.overflow = 'hidden';
         target.style.height = 0;
@@ -167,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
             })
     })
+
     function createStartButton(container) {
         container.innerHTML = '<button id="start">Старт</button>';
         let startButton = document.getElementById('start');

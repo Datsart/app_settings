@@ -76,8 +76,14 @@ button#start {
     line-height: 40px;
     clear: both;
     text-align: right;
-    /*display: none;*/
-
+    display: block;
+}
+.info_face {
+    padding-left: 0px;
+    line-height: 40px;
+    clear: both;
+    text-align: right;
+    display: block;
 }
 
 label {
