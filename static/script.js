@@ -8,13 +8,28 @@ document.addEventListener('DOMContentLoaded', function (event) {
             let demo_gui = data['interface']['demo_gui_on_full_screen_without_borders']['value'][0]
             if (demo_gui === true) {
                 document.getElementById('demo_gui_True').checked = true;
-                document.getElementById('demo_gui_title').value = true
                 document.getElementById('demo_gui_False').checked = false;
+                document.getElementById('demo_gui_title').value = true
             } else {
                 document.getElementById('demo_gui_True').checked = false;
-                document.getElementById('demo_gui_title').value = false
                 document.getElementById('demo_gui_False').checked = true;
+                document.getElementById('demo_gui_title').value = false
+
             }
+            // клики на тру фолс
+            function click_true (){
+                document.getElementById('demo_gui_title').value = true
+            }
+            function click_false (){
+                document.getElementById('demo_gui_title').value = false
+            }
+            document.getElementById('demo_gui_True').addEventListener('click', function () {
+                click_true()
+            })
+            document.getElementById('demo_gui_False').addEventListener('click', function () {
+                click_false()
+            })
+
             document.getElementById('demo_gui_title').innerText = data['interface']['demo_gui_on_full_screen_without_borders']['text']
             document.getElementById('demo_monitor_index_title').innerText = data['interface']['demo_monitor_index']['text']
             document.getElementById('demo_monitor_index_value').value = data['interface']['demo_monitor_index']['value']
