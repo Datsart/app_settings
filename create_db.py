@@ -7,7 +7,7 @@ current_time = now.strftime("%Y-%m-%d %H:%M:%S")
 
 def create_db_func():
     try:
-        with sqlite3.connect(database='database.db') as connection:
+        with sqlite3.connect('database.db') as connection:
             cursor = connection.cursor()
             print('Создана новая БД')
             cursor.execute('''
@@ -16,8 +16,8 @@ def create_db_func():
                     feature TEXT NOT NULL,
                     attribute TEXT NOT NULL,
                     value TEXT NOT NULL,
-                    create_time timestamp,
-                    update_time timestamp
+                    create_time timestamp DEFAULT CURRENT_TIMESTAMP,
+                    update_time timestamp DEFAULT CURRENT_TIMESTAMP
                 )
             ''')
 

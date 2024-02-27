@@ -1,5 +1,5 @@
 def settings_dict():
-    settings_dict = {
+    settings_dictionary = {
         'interface': {
             'demo_gui_on_full_screen_without_borders': {
                 'text': 'Отображать на весь экран без границы:',
@@ -55,4 +55,4 @@ def settings_dict():
             },
         },
     }
-    return settings_dict
+    return settings_dictionary
