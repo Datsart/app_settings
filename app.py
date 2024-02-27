@@ -37,7 +37,7 @@ def settings_dict():
         'interface': {
             'demo_gui_on_full_screen_without_borders': {
                 'text': 'Отображать на весь экран без границы:',
-                'value': [True, False],
+                'value': db.session.get(DB, 10).value if db.session.get(DB, 10).value else 0,
                 'default': 'True if empty() else будет значение из БД',
             },
             'demo_monitor_index': {

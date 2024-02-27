@@ -5,23 +5,24 @@ document.addEventListener('DOMContentLoaded', function (event) {
     fetch(full_url)
         .then(response => response.json())
         .then(data => {
-            let demo_gui = data['interface']['demo_gui_on_full_screen_without_borders']['value'][0]
-            if (demo_gui === true) {
+            let demo_gui = +data['interface']['demo_gui_on_full_screen_without_borders']['value']
+            console.log(+demo_gui)
+            if (demo_gui === 1) {
                 document.getElementById('demo_gui_True').checked = true;
                 document.getElementById('demo_gui_False').checked = false;
-                document.getElementById('demo_gui_title').value = true
+                document.getElementById('demo_gui_title').value = 1
             } else {
                 document.getElementById('demo_gui_True').checked = false;
                 document.getElementById('demo_gui_False').checked = true;
-                document.getElementById('demo_gui_title').value = false
+                document.getElementById('demo_gui_title').value = 0
 
             }
             // клики на тру фолс
             function click_true (){
-                document.getElementById('demo_gui_title').value = true
+                document.getElementById('demo_gui_title').value = 1
             }
             function click_false (){
-                document.getElementById('demo_gui_title').value = false
+                document.getElementById('demo_gui_title').value = 0
             }
             document.getElementById('demo_gui_True').addEventListener('click', function () {
                 click_true()
@@ -139,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 'scale_percent': eval(document.getElementById('scale_percent_value').value),
                 'demo_monitor_index': +document.getElementById('demo_monitor_index_value').value,
                 'face_rectangle_border_size': +document.getElementById('face_rectangle_border_size_value').value,
-                'demo_gui_on_full_screen_without_borders': document.getElementById('demo_gui_title').value,
+                'demo_gui_on_full_screen_without_borders': +document.getElementById('demo_gui_title').value,
             };
 
             fetch(url_for_post, {
