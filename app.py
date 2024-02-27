@@ -45,7 +45,30 @@ def send_structute():
 def take_info():
     data = request.get_json()
     print(data)
-
+    counter = 0
+    a = ['camera', 'interface']
+    for i, j in data.items():
+        if counter <= 6:
+            info = DB(
+                feature=a[0],
+                attribute=i,
+                value=j,
+                create_time=datetime.now(),
+                update_time=datetime.now(),
+            )
+            db.session.add(info)
+            db.session.commit()
+            counter += 1
+        else:
+            info = DB(
+                feature=a[1],
+                attribute=i,
+                value=j,
+                create_time=datetime.now(),
+                update_time=datetime.now(),
+            )
+            db.session.add(info)
+            db.session.commit()
     return data
 
 
@@ -80,7 +103,6 @@ def login():
 #         'update_time': 'время_обновления'
 #     }
 #     return jsonify(settings_data)
-
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5050, debug=True)
