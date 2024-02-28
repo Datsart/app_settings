@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
         .then(response => response.json())
         .then(data => {
             let demo_gui = +data['interface']['demo_gui_on_full_screen_without_borders']['value']
-            console.log(+demo_gui)
             if (demo_gui === 1) {
                 document.getElementById('demo_gui_True').checked = true;
                 document.getElementById('demo_gui_False').checked = false;

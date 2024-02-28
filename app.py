@@ -107,8 +107,16 @@ def send_structute():
 # роут на принятие
 def take_info():
     data = request.get_json()
-    # print(data)
 
+    # print(data)
+    # тут старые данные
+    def old_data():
+        old_list = []
+        for k in DB.query.all():
+            old_list.append(int(k.value))
+        return old_list
+
+    res_old_data = old_data()
     counter = 0
     a = ['camera', 'interface']
     if len(DB.query.all()) == 0:
@@ -136,6 +144,8 @@ def take_info():
                 db.session.add(info)
                 db.session.commit()
     else:
+        new_list = []
+
         value_1 = db.session.get(DB, 1)
         value_2 = db.session.get(DB, 2)
         value_3 = db.session.get(DB, 3)
@@ -146,46 +156,51 @@ def take_info():
         value_8 = db.session.get(DB, 8)
         value_9 = db.session.get(DB, 9)
         value_10 = db.session.get(DB, 10)
+
         value_1.value = data['video_path']
+        new_list.append(value_1.value)
         value_2.value = data['video_read_width']
+        new_list.append(value_2.value)
         value_3.value = data['video_read_height']
+        new_list.append(value_3.value)
         value_4.value = data['fps']
+        new_list.append(value_4.value)
         value_5.value = data['det_size_x']
+        new_list.append(value_5.value)
         value_6.value = data['det_size_y']
+        new_list.append(value_6.value)
         value_7.value = data['scale_percent']
+        new_list.append(value_7.value)
         value_8.value = data['demo_monitor_index']
+        new_list.append(value_8.value)
         value_9.value = data['face_rectangle_border_size']
+        new_list.append(value_9.value)
         value_10.value = data['demo_gui_on_full_screen_without_borders']
+        new_list.append(value_10.value)
+
         db.session.commit()
+
+    counter_a = 1
+    target_id_list = []
+    for i in res_old_data:
+        for j in range(len(new_list)):
+            print(int(i), new_list[counter_a - 1])
+            if (int(i)) != new_list[counter_a - 1]:
+                print('да')
+                # target_id_list.append(counter_a)
+            break
+        counter_a += 1
     return data
 
 
 @app.route('/app', methods=['GET', 'POST'])
 def login():
-    # settings_data = DB.query.all()  # вытаскиваем зн-я из БД
-    #
-    # for i in settings_data:
-    # feature_value = i.feature if i.feature else ''
-    # attribute_value = i.attribute if i.attribute else ''
-    # value_value = i.value if i.value else ''
-    # create_time_value = i.create_time.strftime('%Y-%m-%d %H:%M:%S') if i.create_time else ''
-    # update_time_value = i.update_time.strftime('%Y-%m-%d %H:%M:%S') if i.update_time else ''
     full_url = request.url_root + 'send_structute'
     url_for_post = request.url_root + 'post_response'
     return render_template('index.html', full_url=full_url, url_for_post=url_for_post)
 
 
-# def send_settings():
-#     settings_data = {
-#         'feature': 'значение_фичи',
-#         'attribute': 'значение_атрибута',
-#         'value': 'значение_значения',
-#         'create_time': 'время_создания',
-#         'update_time': 'время_обновления'
-#     }
-#     return jsonify(settings_data)
-
 if __name__ == '__main__':
-    # app.run(host='127.0.0.1', port=5050, debug=True)
-    webview.create_window('App', app)
-    webview.start()
+    app.run(host='127.0.0.1', port=5050, debug=True)
+    # webview.create_window('App', app)
+    # webview.start()
