@@ -184,12 +184,18 @@ def take_info():
     target_id_list = []
     for i in res_old_data:
         for j in range(len(new_list)):
-            print(int(i), new_list[counter_a - 1])
+            # print(int(i), new_list[counter_a - 1])
             if (int(i)) != new_list[counter_a - 1]:
-                print('да')
-                # target_id_list.append(counter_a)
+                # print('да')
+                target_id_list.append(counter_a)
             break
         counter_a += 1
+    # print(target_id_list)
+    for i in target_id_list:
+        object_DB = db.session.get(DB, i)
+        object_DB.update_time = datetime.now()
+        db.session.commit()
+
     return data
 
 
@@ -201,6 +207,5 @@ def login():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5050, debug=True)
-    # webview.create_window('App', app)
-    # webview.start()
+    webview.create_window('App', app)
+    webview.start()
