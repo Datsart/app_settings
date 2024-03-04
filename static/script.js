@@ -16,13 +16,16 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 document.getElementById('demo_gui_title').value = 0
 
             }
+
             // клики на тру фолс
-            function click_true (){
+            function click_true() {
                 document.getElementById('demo_gui_title').value = 1
             }
-            function click_false (){
+
+            function click_false() {
                 document.getElementById('demo_gui_title').value = 0
             }
+
             document.getElementById('demo_gui_True').addEventListener('click', function () {
                 click_true()
             })
@@ -128,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             let url_for_post_element = document.getElementById('url-for-post');
             let url_for_post = url_for_post_element.getAttribute('data-url-for-post');
             // то что я передаю обратно во фласк
-
+            let res = eval(document.getElementById('scale_percent_value').value)
             let data = {
                 'video_path': +document.getElementById('video_path_value').value,
                 'video_read_width': +document.getElementById('video_read_width_value').value,
@@ -136,7 +139,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 'fps': +document.getElementById('fps_value').value,
                 'det_size_x': +document.getElementById('det_size_x_value').value,
                 'det_size_y': +document.getElementById('det_size_y_value').value,
-                'scale_percent': eval(document.getElementById('scale_percent_value').value),
+
+                'scale_percent': +res.toFixed(2),
                 'demo_monitor_index': +document.getElementById('demo_monitor_index_value').value,
                 'face_rectangle_border_size': +document.getElementById('face_rectangle_border_size_value').value,
                 'demo_gui_on_full_screen_without_borders': +document.getElementById('demo_gui_title').value,

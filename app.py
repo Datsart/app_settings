@@ -190,7 +190,7 @@ def take_info():
         counter_id = 1
         counter_list = 0
 
-        while counter_list < 10:
+        while counter_list < len(list_params):
             obj = db.session.get(DB, counter_id)
             obj.value = data[list_params[counter_list]]
             new_list_values.append(obj.value)
