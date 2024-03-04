@@ -56,3 +56,26 @@ def settings_dict():
         },
     }
     return settings_dictionary
+
+
+def get_settings_info(settings_dict):
+    for category, parameters in settings_dict.items():
+        # print(f"Категория: {category}")
+        for parameter, info in parameters.items():
+            text = info['text']
+            value = info['value']
+            print(f"Категория: {category}")
+            print(f"  Параметр: {parameter}")
+            print(f"    Описание: {text}")
+            print(f"    Значение: {value}")
+            print("")
+
+
+# Получаем словарь настроек
+settings = settings_dict()
+
+# Выводим информацию о настройках
+# get_settings_info(settings)
+for i in settings:
+    for j in settings[i]:
+        print(j)
