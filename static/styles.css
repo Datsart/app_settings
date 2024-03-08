@@ -28,21 +28,26 @@ button {
 button:hover {
     transform: scale(1.1);
 }
+
 button#start {
     margin-right: auto;
     margin-left: auto;
     display: block;
 }
+
 button#triggerToggle {
     background: #ffd000;
     color: #333;
 }
+
 button#start {
     background-color: aquamarine;
 }
+
 #stop_btn {
     background-color: brown;
 }
+
 #target {
     padding: 50px 50px;
     background-color: #ffd000;
@@ -70,26 +75,46 @@ button#start {
     vertical-align: 100px;
 }
 
-
-.info_camera {
-    padding-left: 0px;
-    line-height: 40px;
-    clear: both;
-    text-align: right;
-    display: block;
-}
-.info_face {
-    padding-left: 0px;
-    line-height: 40px;
-    clear: both;
-    text-align: right;
-    display: block;
+.slide-animation {
+    overflow: hidden;
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    box-sizing: border-box;
+    transition-property: height, margin, padding;
+    transition-duration: 500ms;
 }
 
-label {
-    float: left;
-    padding-right: 10px;
+.slide-animation.open {
+    height: auto;
+    padding-top: initial;
+    padding-bottom: initial;
+    margin-top: initial;
+    margin-bottom: initial;
 }
+
+
+/*.info_camera {*/
+/*    padding-left: 0px;*/
+/*    line-height: 40px;*/
+/*    clear: both;*/
+/*    text-align: right;*/
+/*    display: block;*/
+/*}*/
+/*.info_face {*/
+/*    padding-left: 0px;*/
+/*    line-height: 40px;*/
+/*    clear: both;*/
+/*    text-align: right;*/
+/*    display: block;*/
+/*}*/
+
+/*label {*/
+/*    float: left;*/
+/*    padding-right: 10px;*/
+/*}*/
 
 .target {
     position: relative;

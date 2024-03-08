@@ -39,62 +39,72 @@ def settings_dict():
                 # 'value': db.session.get(DB, 10).value if db.session.get(DB, 10) else 0,
                 'value': 0,
                 'default': 'True if empty() else будет значение из БД',
+                'data_type': 'checkbox',
             },
             'demo_monitor_index': {
                 'text': 'Индекс монитора:',
                 # 'value': db.session.get(DB, 8).value if db.session.get(DB, 8) else 0,
                 'value': 0,
                 'default': 'True if empty() else будет значение из БД',
+                'data_type': 'number',
             },
             'face_rectangle_border_size': {
                 'text': 'Толщина обводки найденного лица:',
                 # 'value': db.session.get(DB, 9).value if db.session.get(DB, 9) else 3,
                 'value': 3,
                 'default': 'True if empty() else будет значение из БД',
+                'data_type': 'number',
             }
         },
         'camera': {
             'video_path': {
                 'text': 'Rtsp адрес или индекс вебкамеры:',
-                # 'value': db.session.get(DB, 1).value if db.session.get(DB, 1) else 0,
+                # 'value': db.session.get(DB, 1).value if db.session.get(DB, 4) else 0,
                 'value': 0,
                 'default': 'True if empty() else будет значение из БД',
+                'data_type': 'text',
             },
             'video_read_width': {
                 'text': 'Разрешение входного видео (ширина):',
                 # 'value': db.session.get(DB, 2).value if db.session.get(DB, 2) else 1920,
                 'value': 1920,
                 'default': 'True if empty() else будет значение из БД',
+                'data_type': 'number',
             },
             'video_read_height': {
                 'text': 'разрешение входного видео (высота):',
                 # 'value': db.session.get(DB, 3).value if db.session.get(DB, 3) else 1080,
                 'value': 1080,
                 'default': 'True if empty() else будет значение из БД',
+                'data_type': 'number',
             },
             'fps': {
                 'text': 'FPS:',
                 # 'value': db.session.get(DB, 4).value if db.session.get(DB, 4) else 10,
                 'value': 10,
                 'default': 'True if empty() else будет значение из БД',
+                'data_type': 'number',
             },
             'det_size_x': {
                 'text': 'Сжатие для insightface (ширина):',
                 # 'value': db.session.get(DB, 5).value if db.session.get(DB, 5) else 256,
                 'value': 256,
                 'default': 'True if empty() else будет значение из БД',
+                'data_type': 'number',
             },
             'det_size_y': {
                 'text': 'Сжатие для insightface (высота):',
                 # 'value': db.session.get(DB, 6).value if db.session.get(DB, 6) else 256,
                 'value': 256,
                 'default': 'True if empty() else будет значение из БД',
+                'data_type': 'number',
             },
             'scale_percent': {
                 'text': 'Процент сжатия входного кадра (1/2) (1/3) и т.п:',
                 # 'value': db.session.get(DB, 7).value if db.session.get(DB, 7) else '(1 / 1)',
                 'value': 1,
                 'default': 'True if empty() else будет значение из БД',
+                'data_type': 'text',
             },
         },
     }
@@ -252,7 +262,7 @@ def take_info():
 def login():
     full_url = request.url_root + 'send_structute'
     url_for_post = request.url_root + 'post_response'
-    return render_template('index.html', full_url=full_url, url_for_post=url_for_post)
+    return render_template('index_1.html', full_url=full_url, url_for_post=url_for_post)
 
 
 if __name__ == '__main__':
