@@ -79,9 +79,18 @@ button:hover {
     clear: both;
     text-align: right;
     line-height: 25px;
-    padding: 2px;
+    padding: 5px;
 }
 
+p {
+    text-align: left;
+    font-size: 30px;
+    color: black;
+}
+
+p::first-letter {
+    text-transform: uppercase;
+}
 
 
 label {
