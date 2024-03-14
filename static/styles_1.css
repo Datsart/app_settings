@@ -86,3 +86,10 @@ label {
     float: left;
     padding-right: 10px;
 }
+
+.hide {
+    display: none;
+}
+.show {
+    display: block!important;
+}
