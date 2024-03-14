@@ -1,7 +1,7 @@
 html,
 body {
-    margin-left: 10vh;
-    margin-right: 10vh;
+    margin-left: 5vh;
+    margin-right: 5vh;
     margin-top: 0;
     /*right: 10px;*/
     height: 100%;
@@ -22,7 +22,6 @@ body {
     background-color: rgb(115, 42, 111);
     border-radius: 0 0 20px 20px;
     transition: height 500ms ease-in-out;
-    padding-left: 100px;
     padding-bottom: 50px;
     float: left;
     overflow: hidden;
