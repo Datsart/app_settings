@@ -34,7 +34,8 @@ form {
     position: relative;
     padding-left: 50px;
     padding-top: 100px;
-    display: none;
+    /*display: none;*/
+    display: table;
     opacity: 0;
     /* прозрачность */
     animation: animate_1 0.5s forwards;
@@ -81,6 +82,8 @@ button:hover {
     padding: 2px;
 }
 
+
+
 label {
     float: left;
     padding-right: 10px;
@@ -89,6 +92,7 @@ label {
 .hide {
     display: none;
 }
+
 .show {
-    display: block!important;
+    display: block !important;
 }

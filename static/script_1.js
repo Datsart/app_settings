@@ -26,8 +26,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 let title = document.createElement('p');
                 title.textContent = firstParam;
                 div.append(title);
-
                 for (let second_param in data[firstParam]) {
+                    let fieldDiv = document.createElement('div');
+                    fieldDiv.classList.add('field');
+
                     let label = document.createElement('label');
                     label.textContent = data[firstParam][second_param]['text'];
 
@@ -35,9 +37,23 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     input.setAttribute('type', data[firstParam][second_param]['data_type']);
                     input.value = data[firstParam][second_param]['value'];
 
-                    div.append(label);
-                    div.append(input);
+                    fieldDiv.append(label);
+                    fieldDiv.append(input);
+
+                    div.append(fieldDiv);
                 }
+
+                // for (let second_param in data[firstParam]) {
+                //     let label = document.createElement('label');
+                //     label.textContent = data[firstParam][second_param]['text'];
+                //
+                //     let input = document.createElement('input');
+                //     input.setAttribute('type', data[firstParam][second_param]['data_type']);
+                //     input.value = data[firstParam][second_param]['value'];
+                //
+                //     div.append(label);
+                //     div.append(input);
+                // }
 
                 divContainer.append(div);
 
