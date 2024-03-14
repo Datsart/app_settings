@@ -3,9 +3,7 @@ body {
     margin-left: 5vh;
     margin-right: 5vh;
     margin-top: 0;
-    /*right: 10px;*/
     height: 100%;
-    /*margin: 0;*/
     padding: 0;
 }
 
@@ -25,7 +23,6 @@ body {
     padding-bottom: 50px;
     float: left;
     overflow: hidden;
-    animation: animate_2 500ms forwards;
 }
 
 
@@ -35,7 +32,6 @@ form {
     padding-left: 50px;
     padding-top: 100px;
     /*display: none;*/
-    display: table;
     opacity: 0;
     /* прозрачность */
     animation: animate_1 0.5s forwards;
@@ -72,6 +68,9 @@ form {
 
 button:hover {
     transform: scale(1.1);
+}
+button::first-letter {
+    text-transform: uppercase;
 }
 
 
