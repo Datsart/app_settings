@@ -80,10 +80,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
         formInputs.forEach(function (input) {
             if (input.type === 'checkbox') {
                 formData[input.id] = input.checked ? 1 : 0;
+                console.log(input.value);
             } else {
                 formData[input.id] = input.value;
             }
-            console.log(input.value);
+
         });
         return formData;
     }
