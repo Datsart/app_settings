@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
                     let input = document.createElement('input');
                     input.setAttribute('type', data[firstParam][second_param]['data_type']);
+                    input.setAttribute('id', `${second_param}`);  // Устанавливаем уникальный ID
                     input.value = data[firstParam][second_param]['value'];
 
                     fieldDiv.append(label);
@@ -62,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             })
         });
 
+
     function animate() {
         inner.style.height = '0';
         setTimeout(function () {
@@ -72,19 +74,32 @@ document.addEventListener('DOMContentLoaded', function (event) {
         }, 500);
     }
 
+    function getFormValues() {
+        let formData = {};
+        let formInputs = document.querySelectorAll('form input');
+        formInputs.forEach(function (input) {
+            if (input.type === 'checkbox') {
+                formData[input.id] = input.checked ? 1 : 0;  // Если чекбокс отмечен, то 1, иначе 0
+            } else {
+                formData[input.id] = input.value;
+            }
+            console.log(input.value);
+        });
+        return formData;
+    }
+
     function createStartButton(container) {
         container.innerHTML = '<button id="start">Старт</button>';
         let startButton = document.getElementById('start');
         startButton.style.backgroundColor = 'greenyellow'
         startButton.addEventListener('click', function () {
-            createStopButton(container)
+            createStopButton(container);
 
             let url_for_post_element = document.getElementById('url-for-post');
             let url_for_post = url_for_post_element.getAttribute('data-url-for-post');
-            // то что я передаю обратно во фласк
-            let data = {
-            };
-
+            // Получаем все значения из инпутов в момент нажатия на кнопку "Старт"
+            let data = getFormValues();
+            console.log(data)
             fetch(url_for_post, {
                 "method": "POST",
                 "headers": {"Content-Type": "application/json"},
@@ -92,9 +107,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             })
                 .then(response => {
                     return response.json();
-                })
-
-
+                });
         });
     }
 
@@ -102,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
         container.innerHTML = '<button id="stop_btn">Стоп</button>';
         let stopButton = document.getElementById('stop_btn');
         stopButton.addEventListener('click', function () {
-
             createStartButton(container);
         });
     }
@@ -111,6 +123,4 @@ document.addEventListener('DOMContentLoaded', function (event) {
     if (stopButtonContainer) {
         createStartButton(stopButtonContainer);
     }
-
-
 });

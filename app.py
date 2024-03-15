@@ -100,9 +100,9 @@ def settings_dict():
             'scale_percent': {
                 'text': 'Процент сжатия входного кадра (1/2) (1/3) и т.п:',
                 'value': get_value_by_text('Процент сжатия входного кадра (1/2) (1/3) и т.п:') if get_value_by_text(
-                    'Процент сжатия входного кадра (1/2) (1/3) и т.п:') else '(1 / 1)',
+                    'Процент сжатия входного кадра (1/2) (1/3) и т.п:') else 1,
                 'default': 'True if empty() else будет значение из БД',
-                'data_type': 'text',
+                'data_type': 'number',
             },
         },
     }
