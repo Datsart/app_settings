@@ -69,6 +69,7 @@ form {
 button:hover {
     transform: scale(1.1);
 }
+
 button::first-letter {
     text-transform: uppercase;
 }
@@ -103,4 +104,31 @@ label {
 
 .show {
     display: block !important;
+}
+
+button#start {
+    display: block;
+    background: greenyellow;
+    border: none;
+    padding: 15px 22px;
+    margin: 20px auto 0 auto;
+    outline: none;
+    transform: scale(1);
+    transition: .4s ease;
+    border-radius: 25px;
+}
+
+#stop_btn {
+    display: block;
+    border: none;
+    padding: 15px 22px;
+    margin: 20px auto 0 auto;
+    outline: none;
+    transform: scale(1);
+    transition: .4s ease;
+    border-radius: 25px;
+    background-color: brown;
+}
+button#start:hover, #stop_btn:hover {
+    transform: scale(1.1);
 }

@@ -71,4 +71,46 @@ document.addEventListener('DOMContentLoaded', function (event) {
             }, 0);
         }, 500);
     }
+
+    function createStartButton(container) {
+        container.innerHTML = '<button id="start">Старт</button>';
+        let startButton = document.getElementById('start');
+        startButton.style.backgroundColor = 'greenyellow'
+        startButton.addEventListener('click', function () {
+            createStopButton(container)
+
+            let url_for_post_element = document.getElementById('url-for-post');
+            let url_for_post = url_for_post_element.getAttribute('data-url-for-post');
+            // то что я передаю обратно во фласк
+            let data = {
+            };
+
+            fetch(url_for_post, {
+                "method": "POST",
+                "headers": {"Content-Type": "application/json"},
+                "body": JSON.stringify(data),
+            })
+                .then(response => {
+                    return response.json();
+                })
+
+
+        });
+    }
+
+    function createStopButton(container) {
+        container.innerHTML = '<button id="stop_btn">Стоп</button>';
+        let stopButton = document.getElementById('stop_btn');
+        stopButton.addEventListener('click', function () {
+
+            createStartButton(container);
+        });
+    }
+
+    let stopButtonContainer = document.querySelector('.stop');
+    if (stopButtonContainer) {
+        createStartButton(stopButtonContainer);
+    }
+
+
 });
