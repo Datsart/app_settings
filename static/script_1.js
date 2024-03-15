@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
                     let input = document.createElement('input');
                     input.setAttribute('type', data[firstParam][second_param]['data_type']);
-                    input.setAttribute('id', `${second_param}`);  // Устанавливаем уникальный ID
+                    input.setAttribute('id', `${second_param}`);
                     input.value = data[firstParam][second_param]['value'];
 
                     fieldDiv.append(label);
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
         let formInputs = document.querySelectorAll('form input');
         formInputs.forEach(function (input) {
             if (input.type === 'checkbox') {
-                formData[input.id] = input.checked ? 1 : 0;  // Если чекбокс отмечен, то 1, иначе 0
+                formData[input.id] = input.checked ? 1 : 0;
             } else {
                 formData[input.id] = input.value;
             }
@@ -97,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
             let url_for_post_element = document.getElementById('url-for-post');
             let url_for_post = url_for_post_element.getAttribute('data-url-for-post');
-            // Получаем все значения из инпутов в момент нажатия на кнопку "Старт"
             let data = getFormValues();
             console.log(data)
             fetch(url_for_post, {

@@ -158,7 +158,7 @@ def take_info():
 
     res_old_data = old_data()
 
-    if len(DB.query.all()) != 0:  # если НЕ пустая,  то обновляем данные
+    if len(DB.query.all()) != 0:  # если НЕ пустая БД,  то обновляем данные
         new_list_values = []
         list_params = []
         for i in settings_dict():
@@ -175,24 +175,10 @@ def take_info():
             counter_id += 1
             counter_list += 1
             db.session.commit()
-        print(new_list_values)
-        print(old_data())
-        # print(list_params)
-        # db.session.commit()
     # код для обновления времени измененного элемента
-    counter_a = 1
-    target_id_list = []
-    # for i in res_old_data:
-    #     for j in range(len(new_list_values)):
-    #         if (int(i)) != new_list_values[counter_a - 1]:
-    #             target_id_list.append(counter_a)
-    #         break
-    #     counter_a += 1
 
     different_indices = [i for i, (new, old) in enumerate(zip(new_list_values, res_old_data)) if new != old]
 
-    print("Индексы отличающихся элементов:")
-    print(different_indices)
     for i in different_indices:
         print(i)
         object_DB = db.session.get(DB, i)
@@ -210,6 +196,7 @@ def login():
 
 
 if __name__ == '__main__':
+    '''закоментить нужное для развертывания в окне или в браузере'''
     create_db_func()
     app.run(host='127.0.0.1', port=5050, debug=True)
     # webview.create_window('App', app)
