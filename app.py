@@ -36,22 +36,21 @@ def settings_dict():
         'interface': {
             'demo_gui_on_full_screen_without_borders': {
                 'text': 'Отображать на весь экран без границы:',
-                # 'value': db.session.get(DB, 10).value if db.session.get(DB, 10) else 0,
-                'value': 0,
+                'value': get_value_by_text('Отображать на весь экран без границы:') if get_value_by_text(
+                    'Отображать на весь экран без границы:') else 0,
                 'default': 'True if empty() else будет значение из БД',
                 'data_type': 'checkbox',
             },
             'demo_monitor_index': {
                 'text': 'Индекс монитора:',
-                # 'value': db.session.get(DB, 8).value if db.session.get(DB, 8) else 0,
-                'value': 0,
+                'value': get_value_by_text('Индекс монитора:') if get_value_by_text('Индекс монитора:') else 0,
                 'default': 'True if empty() else будет значение из БД',
                 'data_type': 'number',
             },
             'face_rectangle_border_size': {
                 'text': 'Толщина обводки найденного лица:',
-                # 'value': db.session.get(DB, 9).value if db.session.get(DB, 9) else 3,
-                'value': 3,
+                'value': get_value_by_text('Толщина обводки найденного лица:') if get_value_by_text(
+                    'Толщина обводки найденного лица:') else 3,
                 'default': 'True if empty() else будет значение из БД',
                 'data_type': 'number',
             }
@@ -59,56 +58,63 @@ def settings_dict():
         'camera': {
             'video_path': {
                 'text': 'Rtsp адрес или индекс вебкамеры:',
-                # 'value': db.session.get(DB, 1).value if db.session.get(DB, 4) else 0,
-                'value': 0,
+                'value': get_value_by_text('Rtsp адрес или индекс вебкамеры:') if get_value_by_text(
+                    'Rtsp адрес или индекс вебкамеры:') else 0,
                 'default': 'True if empty() else будет значение из БД',
                 'data_type': 'text',
             },
             'video_read_width': {
                 'text': 'Разрешение входного видео (ширина):',
-                # 'value': db.session.get(DB, 2).value if db.session.get(DB, 2) else 1920,
-                'value': 1920,
+                'value': get_value_by_text('Разрешение входного видео (ширина):') if get_value_by_text(
+                    'Разрешение входного видео (ширина):') else 1920,
                 'default': 'True if empty() else будет значение из БД',
                 'data_type': 'number',
             },
             'video_read_height': {
-                'text': 'разрешение входного видео (высота):',
-                # 'value': db.session.get(DB, 3).value if db.session.get(DB, 3) else 1080,
-                'value': 1080,
+                'text': 'Разрешение входного видео (высота):',
+                'value': get_value_by_text('Разрешение входного видео (высота):') if get_value_by_text(
+                    'Разрешение входного видео (высота):') else 1080,
                 'default': 'True if empty() else будет значение из БД',
                 'data_type': 'number',
             },
             'fps': {
                 'text': 'FPS:',
-                # 'value': db.session.get(DB, 4).value if db.session.get(DB, 4) else 10,
-                'value': 10,
+                'value': get_value_by_text('FPS') if get_value_by_text('FPS') else 10,
                 'default': 'True if empty() else будет значение из БД',
                 'data_type': 'number',
             },
             'det_size_x': {
                 'text': 'Сжатие для insightface (ширина):',
-                # 'value': db.session.get(DB, 5).value if db.session.get(DB, 5) else 256,
-                'value': 256,
+                'value': get_value_by_text('Сжатие для insightface (ширина):') if get_value_by_text(
+                    'Сжатие для insightface (ширина):') else 256,
                 'default': 'True if empty() else будет значение из БД',
                 'data_type': 'number',
             },
             'det_size_y': {
                 'text': 'Сжатие для insightface (высота):',
-                # 'value': db.session.get(DB, 6).value if db.session.get(DB, 6) else 256,
-                'value': 256,
+                'value': get_value_by_text('Сжатие для insightface (высота):') if get_value_by_text(
+                    'Сжатие для insightface (высота):') else 256,
                 'default': 'True if empty() else будет значение из БД',
                 'data_type': 'number',
             },
             'scale_percent': {
                 'text': 'Процент сжатия входного кадра (1/2) (1/3) и т.п:',
-                # 'value': db.session.get(DB, 7).value if db.session.get(DB, 7) else '(1 / 1)',
-                'value': 1,
+                'value': get_value_by_text('Процент сжатия входного кадра (1/2) (1/3) и т.п:') if get_value_by_text(
+                    'Процент сжатия входного кадра (1/2) (1/3) и т.п:') else '(1 / 1)',
                 'default': 'True if empty() else будет значение из БД',
                 'data_type': 'text',
             },
         },
     }
     return settings_dictionary
+
+
+def get_value_by_text(text):
+    '''функция для поиска значений в БД по названию параметра'''
+    with app.app_context():
+        setting = DB.query.filter_by(attribute=text).first()
+        if setting:
+            return setting.value
 
 
 @app.route('/', methods=['GET', 'POST'])
