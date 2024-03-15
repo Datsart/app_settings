@@ -149,8 +149,6 @@ def take_info():
     '''роут на принятие данных'''
     data = request.get_json()  # ответ с фронта
 
-    # print(data)
-
     def old_data():
         '''тут старые данные из БД'''
         old_list = []
@@ -159,45 +157,9 @@ def take_info():
         return old_list
 
     res_old_data = old_data()
-    # counter = 0
-    #
-    # for i, j in data.items():
-    #
-    #     if counter <= 6:
-    #         info = DB(
-    #             feature=a[0],
-    #             attribute=i,
-    #             value=j,
-    #             create_time=datetime.now(),
-    #             update_time=datetime.now(),
-    #         )
-    #         db.session.add(info)
-    #         db.session.commit()
-    #         counter += 1
-    #     else:
-    #         info = DB(
-    #             feature=a[1],
-    #             attribute=i,
-    #             value=j,
-    #             create_time=datetime.now(),
-    #             update_time=datetime.now(),
-    #         )
-    #         db.session.add(info)
-    #         db.session.commit()
-    # print(DB.query.filter(DB.attribute == 'Отображать на весь экран без границы:').first())
 
     if len(DB.query.all()) != 0:  # если НЕ пустая,  то обновляем данные
         new_list_values = []
-        # for old_object in DB.query.all():
-        #     attr = old_object.attribute
-        #     new_obj = DB.query.filter(DB.attribute == f'{attr}').first()
-        #     for i in settings_dict():
-        #         for params in settings_dict()[i]:
-        #
-        #             new_obj.value = data[params]
-        #             new_list_values.append(new_obj.value)
-        # new_list = new_list_values[:len(DB.query.all())]
-        # print(new_list)
         list_params = []
         for i in settings_dict():
             for j in settings_dict()[i]:
@@ -209,54 +171,30 @@ def take_info():
         while counter_list < len(list_params):
             obj = db.session.get(DB, counter_id)
             obj.value = data[list_params[counter_list]]
-            new_list_values.append(obj.value)
+            new_list_values.append(int(obj.value))
             counter_id += 1
             counter_list += 1
             db.session.commit()
-        # value_1 = db.session.get(DB, 1)
-        # value_2 = db.session.get(DB, 2)
-        # value_3 = db.session.get(DB, 3)
-        # value_4 = db.session.get(DB, 4)
-        # value_5 = db.session.get(DB, 5)
-        # value_6 = db.session.get(DB, 6)
-        # value_7 = db.session.get(DB, 7)
-        # value_8 = db.session.get(DB, 8)
-        # value_9 = db.session.get(DB, 9)
-        # value_10 = db.session.get(DB, 10)
-        #
-        # value_1.value = data['video_path']
-        # new_list.append(value_1.value)
-        # value_2.value = data['video_read_width']
-        # new_list.append(value_2.value)
-        # value_3.value = data['video_read_height']
-        # new_list.append(value_3.value)
-        # value_4.value = data['fps']
-        # new_list.append(value_4.value)
-        # value_5.value = data['det_size_x']
-        # new_list.append(value_5.value)
-        # value_6.value = data['det_size_y']
-        # new_list.append(value_6.value)
-        # value_7.value = data['scale_percent']
-        # new_list.append(value_7.value)
-        # value_8.value = data['demo_monitor_index']
-        # new_list.append(value_8.value)
-        # value_9.value = data['face_rectangle_border_size']
-        # new_list.append(value_9.value)
-        # value_10.value = data['demo_gui_on_full_screen_without_borders']
-        # new_list.append(value_10.value)
         print(new_list_values)
-        print(list_params)
+        print(old_data())
+        # print(list_params)
         # db.session.commit()
     # код для обновления времени измененного элемента
     counter_a = 1
     target_id_list = []
-    for i in res_old_data:
-        for j in range(len(new_list_values)):
-            if (int(i)) != new_list_values[counter_a - 1]:
-                target_id_list.append(counter_a)
-            break
-        counter_a += 1
-    for i in target_id_list:
+    # for i in res_old_data:
+    #     for j in range(len(new_list_values)):
+    #         if (int(i)) != new_list_values[counter_a - 1]:
+    #             target_id_list.append(counter_a)
+    #         break
+    #     counter_a += 1
+
+    different_indices = [i for i, (new, old) in enumerate(zip(new_list_values, res_old_data)) if new != old]
+
+    print("Индексы отличающихся элементов:")
+    print(different_indices)
+    for i in different_indices:
+        print(i)
         object_DB = db.session.get(DB, i)
         object_DB.update_time = datetime.now()
         db.session.commit()
