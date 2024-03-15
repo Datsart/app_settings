@@ -178,12 +178,12 @@ def take_info():
     # код для обновления времени измененного элемента
 
     different_indices = [i for i, (new, old) in enumerate(zip(new_list_values, res_old_data)) if new != old]
-
     for i in different_indices:
         print(i)
-        object_DB = db.session.get(DB, i)
-        object_DB.update_time = datetime.now()
-        db.session.commit()
+        object_DB = DB.query.get(i + 1)
+        if object_DB:
+            object_DB.update_time = datetime.now()
+            db.session.commit()
 
     return data
 
