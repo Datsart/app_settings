@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
         formInputs.forEach(function (input) {
             if (input.type === 'checkbox') {
                 formData[input.id] = input.checked ? 1 : 0;
-                console.log(input.value);
             } else {
                 formData[input.id] = input.value;
             }
@@ -99,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
             let url_for_post_element = document.getElementById('url-for-post');
             let url_for_post = url_for_post_element.getAttribute('data-url-for-post');
             let data = getFormValues();
-            console.log(data)
             fetch(url_for_post, {
                 "method": "POST",
                 "headers": {"Content-Type": "application/json"},
