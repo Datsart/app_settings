@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     fetch(full_url)
         .then(response => response.json())
         .then(data => {
+            // то что приходит с бэка
             // отрисовали кнопки
             for (let firstParam in data) {
                 let button = document.createElement('button');
@@ -34,7 +35,13 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     let input = document.createElement('input');
                     input.setAttribute('type', data[firstParam][second_param]['data_type']);
                     input.setAttribute('id', `${second_param}`);
-                    input.value = data[firstParam][second_param]['value'];
+
+                    // Проверяем, если значение извне равно '1', то отмечаем чекбокс
+                    if (data[firstParam][second_param]['value'] === 1 && data[firstParam][second_param]['data_type'] === 'checkbox') {
+                        input.checked = true;
+                    } else {
+                        input.value = data[firstParam][second_param]['value'];
+                    }
 
                     fieldDiv.append(label);
                     fieldDiv.append(input);
@@ -75,10 +82,12 @@ document.addEventListener('DOMContentLoaded', function (event) {
     }
 
     function getFormValues() {
+        // обработка флажков которые в бэк отправляем
         let formData = {};
         let formInputs = document.querySelectorAll('form input');
         formInputs.forEach(function (input) {
             if (input.type === 'checkbox') {
+                console.log(input.value)
                 formData[input.id] = input.checked ? 1 : 0;
             } else {
                 formData[input.id] = input.value;
@@ -98,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             let url_for_post_element = document.getElementById('url-for-post');
             let url_for_post = url_for_post_element.getAttribute('data-url-for-post');
             let data = getFormValues();
+            // отправка данных в бэк
             fetch(url_for_post, {
                 "method": "POST",
                 "headers": {"Content-Type": "application/json"},

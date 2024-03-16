@@ -100,7 +100,6 @@ def take_info():
 
     different_indices = [i for i, (new, old) in enumerate(zip(new_list_values, res_old_data)) if new != old]
     for i in different_indices:
-        print(i)
         object_DB = db.session.get(DB, i + 1)
         if object_DB:
             object_DB.update_time = datetime.now()
