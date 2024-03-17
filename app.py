@@ -74,7 +74,7 @@ def take_info():
         '''тут старые данные из БД'''
         old_list = []
         for k in DB.query.all():
-            old_list.append(int(k.value))
+            old_list.append(k.value)
         return old_list
 
     res_old_data = old_data()
@@ -92,7 +92,8 @@ def take_info():
         while counter_list < len(list_params):
             obj = db.session.get(DB, counter_id)
             obj.value = data[list_params[counter_list]]
-            new_list_values.append(int(obj.value))
+            # print(type(obj.value))
+            new_list_values.append(obj.value)
             counter_id += 1
             counter_list += 1
             db.session.commit()

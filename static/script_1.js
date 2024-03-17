@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     input.setAttribute('type', data[firstParam][second_param]['data_type']);
                     input.setAttribute('id', `${second_param}`);
 
-                    // Проверяем, если значение извне равно '1', то отмечаем чекбокс
                     if (data[firstParam][second_param]['value'] === 1 && data[firstParam][second_param]['data_type'] === 'checkbox') {
                         input.checked = true;
                     } else {
@@ -87,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
         let formInputs = document.querySelectorAll('form input');
         formInputs.forEach(function (input) {
             if (input.type === 'checkbox') {
-                console.log(input.value)
                 formData[input.id] = input.checked ? 1 : 0;
             } else {
                 formData[input.id] = input.value;
