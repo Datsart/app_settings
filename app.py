@@ -5,6 +5,7 @@ from datetime import datetime
 import os
 from create_db import create_db_func
 from structure import settings_dict
+import re
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 template_folder = os.path.join(current_dir, 'templates')
@@ -24,6 +25,7 @@ class DB(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     feature = db.Column(db.String, nullable=False)
+    parameter = db.Column(db.String, nullable=False)
     attribute = db.Column(db.String, nullable=False)
     value = db.Column(db.String, nullable=False)
     create_time = db.Column(db.DateTime, default=datetime.now)
@@ -55,6 +57,7 @@ def send_structute():
                 value = info['value']
                 info = DB(
                     feature=category,
+                    parameter=parameter,
                     attribute=text,
                     value=value,
                     create_time=datetime.now(),
@@ -62,6 +65,7 @@ def send_structute():
                 )
                 db.session.add(info)
                 db.session.commit()
+
     return settings_dict()
 
 
@@ -80,31 +84,72 @@ def take_info():
     res_old_data = old_data()
 
     if len(DB.query.all()) != 0:  # если НЕ пустая БД,  то обновляем данные
+
+        # параметры структуры ДО добавления новых полей
+        old_list_params = []
+        for i in DB.query.all():
+            old_list_params.append(i.parameter)
+        # print(old_list_params, ' old list')
+        # параметры структуры ПОЛСЕ добавления новых полей
         new_list_values = []
-        list_params = []
+        new_list_params = []
         for i in settings_dict():
             for j in settings_dict()[i]:
-                list_params.append(j)
+                if j not in old_list_params:
+                    print(j)
+                    # список получается только из тех элементов которые добавили
+                    new_list_params.append(j)
+
+        # проверяем на добавление нового поля в БД
+        for new_param in new_list_params:
+            if new_param not in old_list_params:
+                for category, parameters in settings_dict().items():
+                    for parameter, info in parameters.items():
+                        if parameter == new_param:
+                            text = info['text']
+                            value = info['value']
+                            info = DB(
+                                feature=category,
+                                parameter=parameter,
+                                attribute=text,
+                                value=value,
+                                create_time=datetime.now(),
+                                update_time=datetime.now(),
+                            )
+                            db.session.add(info)
+                            db.session.commit()
+
+        def is_numeric_string(input_str):
+            '''выводит ТРУ если в строке целое или дробное число, если встречаются НЕ числа то фолс'''
+            if type(input_str) == int:
+                return True
+            else:
+                pattern = r"^[0-9]+(\.[0-9]+)?$"
+                return bool(re.match(pattern, input_str))
 
         counter_id = 1
         counter_list = 0
-
-        while counter_list < len(list_params):
+        # к старому полному списку добавили новые добавленные поля
+        new_list_params = old_list_params + new_list_params
+        # обновили значения в БД
+        while counter_list < len(new_list_params):
             obj = db.session.get(DB, counter_id)
-            obj.value = data[list_params[counter_list]]
-            # print(type(obj.value))
-            new_list_values.append(obj.value)
+            obj.value = data[new_list_params[counter_list]]
+            if is_numeric_string(obj.value) == True:
+                new_list_values.append(int(obj.value))
+            else:
+                new_list_values.append(obj.value)
             counter_id += 1
             counter_list += 1
             db.session.commit()
-    # код для обновления времени измененного элемента
 
-    different_indices = [i for i, (new, old) in enumerate(zip(new_list_values, res_old_data)) if new != old]
-    for i in different_indices:
-        object_DB = db.session.get(DB, i + 1)
-        if object_DB:
-            object_DB.update_time = datetime.now()
-            db.session.commit()
+        # код для обновления времени измененного элемента
+        different_indices = [i for i, (new, old) in enumerate(zip(new_list_values, res_old_data)) if new != old]
+        for i in different_indices:
+            object_DB = db.session.get(DB, i + 1)
+            if object_DB:
+                object_DB.update_time = datetime.now()
+                db.session.commit()
 
     return data
 

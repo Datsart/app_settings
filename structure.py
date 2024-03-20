@@ -2,6 +2,12 @@ def settings_dict():
     from app import get_value_by_text
     settings_dictionary = {
         'interface': {
+            # 'test': {
+            #     'text': 'Тестовое',
+            #     'value': get_value_by_text('Тестовое') if get_value_by_text('Тестовое') else 0,
+            #     'default': 'True if empty() else будет значение из БД',
+            #     'data_type': 'text',
+            # },
             'demo_gui_on_full_screen_without_borders': {
                 'text': 'Отображать на весь экран без границы:',
                 'value': get_value_by_text('Отображать на весь экран без границы:') if get_value_by_text(
@@ -75,3 +81,4 @@ def settings_dict():
         },
     }
     return settings_dictionary
+

@@ -25,6 +25,7 @@ def create_db_func():
     dbConnection = create_connection()
     sql = ''' CREATE TABLE IF NOT EXISTS settings (
                         ID INTEGER PRIMARY KEY,
+                        parameter TEXT NOT NULL,
                         feature TEXT NOT NULL,
                         attribute TEXT NOT NULL,
                         value INTEGER NOT NULL,
